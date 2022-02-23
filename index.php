@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                         <?php 
-                            $query='SELECT * FROM employees LIMIT 100';
+                            $query='SELECT * FROM employees WHERE emp_no > 499950';
                             $result_employee = mysqli_query($conn, $query);
                             while($row = mysqli_fetch_array($result_employee)){ ?>
                                 <tr>
@@ -86,11 +86,11 @@
                                     <td><?php echo $row['gender'] ?></td>
                                     <td><?php echo $row['hire_date'] ?></td>
                                     <td>
-                                        <a href="edit.php?id=<?php echo $row['emp_no']?>"
+                                        <a href="edit.php?emp_no=<?php echo $row['emp_no']?>"
                                         class = "btn btn-outline-primary">
                                             <i class = "fas fa-marker"></i>
                                         </a>
-                                        <a href="delete.php?id=<?php echo $row['emp_no']?>"
+                                        <a href="delete.php?emp_no=<?php echo $row['emp_no']?>"
                                         class = "btn btn-outline-danger">
                                         <i class = "fas fa-trash-alt"></i>
                                         </a>

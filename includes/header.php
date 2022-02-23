@@ -16,7 +16,8 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="container">
          <a href="index.php" class="navbar-brand">
-         <img src="includes\logo.png" alt="" width="40" height="34" class="d-inline-block align-text-top">
+         <!--<img src="includes\logo.png" alt="" width="40" height="34" class="d-inline-block align-text-top">-->
+         <i class="fa-brands fa-connectdevelop fa-spin" style="--fa-animation-duration: 15s;"></i>
          EMPLOYEES DATABASE
          </a>
     </div>
