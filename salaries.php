@@ -6,9 +6,9 @@
             <!--buttons card-->
             <div class="card card-body">
                 <div class="btn-group">
-                    <a href="index.php" class="btn btn-primary active" aria-current="page">Employees</a>
+                    <a href="index.php" class="btn btn-primary" >Employees</a>
                     <a href="Departments.php" class="btn btn-primary">Departments</a>
-                    <a href="salaries.php" class="btn btn-primary" aria-current="page">Salaries</a>
+                    <a href="salaries.php" class="btn btn-primary active" aria-current="page">Salaries</a>
                 </div>
             </div>
             <?php if(isset($_SESSION['message'])){?>
@@ -27,35 +27,23 @@
                         <input type="int" name="emp_no" class="form-control" 
                         placeholder="Número del empleado" autofocus>
                     </div>
-                    <!--Fecha de nacimiento-->
+                    <!--salario-->
                     <div class="form group">
-                        <p>fecha de nacimiento: </p>
-                        <input type="date" name="birth_date" class="form-control">
+                        <input type="int" name="salary" class="form-control" 
+                        placeholder="Salario" autofocus>
                     </div>
-                    <!--Nombre y apellido-->
-                    <div class="input-group">
-                        <input type="text" aria-label="first name" name = "first_name" class="form-control"
-                        placeholder = "Nombre">
-                        <input type="text" aria-label="Last name" name = "last_name" class="form-control"
-                        placeholder = "Apellido">
-                    </div>
-                    <!--Genero-->
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">Genero</label>
-                        <select class="form-select" name = "gender">
-                            <option selected></option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>
-                    </div>
-                    <!--Fecha de contratación-->
+                    <!--Inicio de contrato-->
                     <div class="form group">
-                        <p>fecha de contratación: </p>
-                        <input type="date" name="hire_date" class="form-control">
+                        <p>inicio del contrato: </p>
+                        <input type="date" name="from_date" class="form-control">
+                    </div>
+                    <div class="form group">
+                        <p>finalización del contrato: </p>
+                        <input type="date" name="to_date" class="form-control">
                     </div>
                     <div class="d-grid gap-2">
                     <input type="submit" class="btn btn-outline-primary btn-block"
-                    name="save_info" value="Guardar">
+                        name="save_salary" value="Guardar">
                     </div>
                 </form>
             </div>
@@ -66,26 +54,22 @@
                     <thead>
                         <tr>
                             <th>Emp no</th>
-                            <th>Birth date</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Gender</th>
-                            <th>Hire date</th>
+                            <th>Salary</th>
+                            <th>from date</th>
+                            <th>to date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
-                            $query='SELECT * FROM employees WHERE emp_no > 499950 ORDER BY emp_no DESC';
+                            $query='SELECT * FROM salaries WHERE emp_no > 499950 ORDER BY emp_no DESC' ;
                             $result_employee = mysqli_query($conn, $query);
                             while($row = mysqli_fetch_array($result_employee)){ ?>
                                 <tr>
                                     <td><?php echo $row['emp_no'] ?></td>
-                                    <td><?php echo $row['birth_date'] ?></td>
-                                    <td><?php echo $row['first_name'] ?></td>
-                                    <td><?php echo $row['last_name'] ?></td>
-                                    <td><?php echo $row['gender'] ?></td>
-                                    <td><?php echo $row['hire_date'] ?></td>
+                                    <td><?php echo $row['salary'] ?></td>
+                                    <td><?php echo $row['from_date'] ?></td>
+                                    <td><?php echo $row['to_date'] ?></td>
                                     <td>
                                         <a href="edit.php?emp_no=<?php echo $row['emp_no']?>"
                                         class = "btn btn-outline-primary">
@@ -104,5 +88,3 @@
     </div>
 </div>
 <?php include("includes\hooter.php") ?>
-
-   

@@ -6,52 +6,72 @@
         <!--buttons card-->
             <div class="card card-body">
                 <div class="btn-group">
-                    <a href="#" class="btn btn-primary active" aria-current="page">Employees</a>
-                    <a href="#" class="btn btn-primary">Departments</a>
-                    <a href="#" class="btn btn-primary">Salaries</a>
+                    <a href="index.php" class="btn btn-primary" >Employees</a>
+                    <a href="Departments.php" class="btn btn-primary active" aria-current="page">Departments</a>
+                    <a href="salaries.php" class="btn btn-primary " aria-current="page">Salaries</a>
                 </div>
             </div>
-        
+            <?php if(isset($_SESSION['message'])){?>
+                <div class="alert alert-<?=$_SESSION['message_type'] ?> alert-dimissible fade show" 
+                role="alert">
+                    <?= $_SESSION['message']?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            <?php } session_unset(); ?> 
             <!--info card-->
             <div class="card card-body">
                 <form action="save_info.php" method="POST">
-                    <!--numero del empleado-->
+                    <!--numero del depto-->
                     <div class="form group">
-                        <input type="int" name="emp_no" class="form-control" 
-                        placeholder="Número del empleado" autofocus>
+                        <input type="text" name="dept_no" class="form-control" 
+                        placeholder="Número del departamento" autofocus>
                     </div>
-                    <!--Fecha de nacimiento-->
-                    <div class="form group">
-                        <p>fecha de nacimiento: </p>
-                        <input type="date" name="birth_date" class="form-control">
-                    </div>
-                    <!--Nombre y apellido-->
+                    <!--Nombre del depto-->
                     <div class="input-group">
-                        <input type="text" aria-label="first name" name = "first_name" class="form-control"
-                        placeholder = "Nombre">
-                        <input type="text" aria-label="Last name" name = "last_name" class="form-control"
-                        placeholder = "Apellido">
-                    </div>
-                    <!--Genero
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">Genero</label>
-                        <select class="form-select" name = "gender">
-                            <option selected></option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>
-                    </div>-->
-                    <!--Fecha de contratación-->
-                    <div class="form group">
-                        <p>fecha de contratación: </p>
-                        <input type="date" name="hire_date" class="form-control">
+                        <input type="text" aria-label="dept name" name = "dept_name" class="form-control"
+                        placeholder = "Nombre del departamento">
                     </div>
                     <div class="d-grid gap-2">
-                    <input type="submit" class="btn btn-outline-primary btn-block"
-                    name="save_info" value="Guardar">
+                        <input type="submit" class="btn btn-outline-primary btn-block"
+                        name="save_dept" value="Guardar">
                     </div>
                 </form>
             </div>
+        </div>
+        <!--Datos mostrados-->
+        <div class="col-md-7">
+            <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>dept no</th>
+                            <th>dept name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $query='SELECT * FROM departments';
+                            $result_employee = mysqli_query($conn, $query);
+                            while($row = mysqli_fetch_array($result_employee)){ ?>
+                                <tr>
+                                    <td><?php echo $row['dept_no'] ?></td>
+                                    <td><?php echo $row['dept_name'] ?></td>
+                                    
+                                    <td>
+                                        <a href="edit.php?dept_no=<?php echo $row['dept_no']?>"
+                                        class = "btn btn-outline-primary">
+                                            <i class = "fas fa-marker"></i>
+                                        </a>
+                                        <a href="delete.php?dept_no=<?php echo $row['dept_no']?>"
+                                            class = "btn btn-outline-danger">
+                                            <i class = "fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                        <?php } ?>
+                    </tbody>
+            </table>
         </div>
     </div>
 </div>
